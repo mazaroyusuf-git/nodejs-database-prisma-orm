@@ -1,0 +1,46 @@
+{
+  "name": "node-js-database-dan-prisma-orm",
+  "version": "1.0.0",
+  "description": "Belajar Node JS Database dan ORM Prisma",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.[t|j]sx?$": "babel-jest"
+    },
+    "maxConcurrency": 5,
+    "verbose": true,
+    "collectCoverage": false,
+    "coverageThreshold": {
+      "global": {
+        "branches": 0,
+        "functions": 0,
+        "lines": 0,
+        "statemenst": 0
+      }
+    }
+  },
+  "type": "module",
+  "author": "Mazaro Yusuf Gunardiawan",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/plugin-transform-runtime": "^7.28.0",
+    "@types/express": "^5.0.3",
+    "@types/jest": "^30.0.0",
+    "cookie-parser": "^1.4.7",
+    "express": "^4.21.2",
+    "express-fileupload": "^1.5.2",
+    "mustache": "^4.2.0",
+    "path-to-regexp": "^8.2.0"
+  },
+  "devDependencies": {
+    "@babel/preset-env": "^7.28.0",
+    "babel-jest": "^30.0.5",
+    "jest": "^28.1.0",
+    "supertest": "^6.3.4",
+    "winston": "^3.17.0",
+    "winston-daily-rotate-file": "^5.0.0"
+  }
+}
