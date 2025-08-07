@@ -1,0 +1,79 @@
+https://gist.github.com/bradtraversy/c831baaad44343cc945e76c2e30927b3
+
+1. contoh pembuatan table 
+CREATE TABLE products (
+    id VARCHAR(100) NOT NULL,
+    name VARCHAR(100) NOT NULL,
+    description TEXT,
+    price INT UNSIGNED NOT NULL,
+    quantity INT UNSIGNED NOT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE = InnoDB;
+
+2. untuk memasukkan data ke table
+INSERT INTO nama_table(kolom1, kolom2, kolom3) VALUES (value_kolom1, value_kolom2, value_kolom3);
+
+3. untuk mengambil data dalam table bisa :
+untuk mengambil semua data
+SELECT * FROM nama_table; 
+
+untuk mengambil kolom spesifik pada table
+SELECT kolom1, kolom2, kolom3 FROM nama_table;
+
+untuk mengambil data dengan kondisi where
+SELECT kolom1, kolom2, kolom3 FROM nama_table WHERE kolom1 = value;
+bisa juga menggunakan <,>,=,!=
+
+4. saat membuat table disarankan atau bisa diwajinkan membuat primary key sebagai representasi dari identitas tiap data table dan harus unique, kita bisa set PRIMARY KEY pada saat create ataupun alter, satu table bisa lebih dari satu primary key pada kolom
+CREATE TABLE products (
+    id VARCHAR(100) NOT NULL,
+    name VARCHAR(100) NOT NULL,
+    description TEXT,
+    price INT UNSIGNED NOT NULL,
+    quantity INT UNSIGNED NOT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (id, ...)
+) ENGINE = InnoDB;
+
+ALTER TABLE products
+    ADD PRIMARY KEY (id)
+
+5. untuk melakukan update kita bisa gunakan
+UPDATE nama_table 
+    SET kolom = value
+    WHERE ....
+
+6. Kita bisa mencocokan pola dalam teks saat sedang select, update maupun alter dengan LIKE
+UPDATE nama_table 
+    SET kolom = value
+    WHERE kolom_berteks LIKE '%pola%'
+
+contoh :
+UPDATE products
+    SET category = 'Monitor'
+    WHERE name LIKE '%Monitor%';
+
+7. kita juga bisa menggunakan pengecualian saat sedang select, update maupun alter dengan NOT IN
+UPDATE nama_table
+    SET kolom = value
+    WHERE kolom NOT IN (value, ...);
+
+contoh : 
+UPDATE products
+    SET category = 'Other Hardware'
+    WHERE category NOT IN ('Mouse', 'Keyboard', 'Monitor');
+
+artinya semua yang bukan berkategory Mouse, Keyboard, Monitor, data category nya akan di set ke Other Hardware
+
+8. kita juga bisa melakukan alias ketika misal nya kita menselect kolom dengan nama yang panjang
+SELECT 
+    kolom_panjang1 AS kp1,
+    kolom_panjang2 AS kp2
+    FROM nama_table;
+
+bisa juga menggunakan alias pada table
+SELECT 
+    nt.kolom_panjang1 AS kp1,
+    nt.kolom_panjang2 AS kp2
+    FROM nama_table AS nt;
+    

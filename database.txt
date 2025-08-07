@@ -1,0 +1,96 @@
+https://gist.github.com/bradtraversy/c831baaad44343cc945e76c2e30927b3
+
+1. membuat database
+CREATE DATABASE belajar_mysql;
+
+2. masuk ke dalam database
+USE belajar_mysql;
+
+3. menghapus database
+DROP DATABASE belajar_mysql;
+
+4. di mysql dalam satu kolom maksimal cuma 1 tipe data, berikut tipe data nya:
+Numeric (Angka)
+Untuk menyimpan bilangan bulat dan pecahan
+INT → bilangan bulat biasa (misal: 10, 5000)
+TINYINT → bilangan kecil (0–255 atau -128–127)
+SMALLINT → lebih besar dari TINYINT
+MEDIUMINT, BIGINT → bilangan lebih besar lagi
+FLOAT → angka pecahan presisi kecil (misal: 3.14)
+DOUBLE → angka pecahan presisi tinggi
+DECIMAL(p, s) → angka desimal akurat, biasa untuk keuangan
+
+String / Character
+Untuk menyimpan teks
+CHAR(n) → teks tetap panjang n (misal: CHAR(5) selalu 5 karakter)
+VARCHAR(n) → teks panjang fleksibel hingga n karakter
+TEXT → teks panjang (hingga 65.535 karakter)
+TINYTEXT, MEDIUMTEXT, LONGTEXT → variasi TEXT lebih kecil/besar
+ENUM('a', 'b', 'c') → pilihan tetap dari beberapa nilai, cuma bisa menerima data di enum nya
+SET('a', 'b', 'c') → bisa pilih lebih dari satu nilai dari daftar
+
+Date & Time (Tanggal/Waktu)
+DATE → format YYYY-MM-DD
+DATETIME → YYYY-MM-DD HH:MM:SS
+TIMESTAMP → seperti DATETIME, tapi bisa otomatis simpan waktu saat ini
+TIME → HH:MM:SS
+YEAR → YYYY (tahun saja)
+
+5. tipe data juga punya attribute yaitu:
+Number Attribute: 
+TYPE(N) → type sesuai dengan data number, misal INT(3). set nilai maks sesuai N
+ZEROFILL → menambahkan angka nol di depan agar sesuai lebar kolom (misal: 00042). sesuai type(n)
+UNSIGNED → untuk menyimpan nomor positif saja
+
+6. kita bisa melihat engine penyimpanan di mysql dengan menggunakan : (disarankan menggunakan InnoDB)
+SHOW ENGINES;
+
+7. untuk melihat tables yang ada bisa gunakan :
+SHOW TABLES;
+
+8. untuk membuat table sederhana
+CREATE TABLE nama_table (
+    item1 tipe_data,
+    item2 tipe_data,
+    ....
+) ENGINE = InnoDB;
+
+9. untuk melihat detail format table
+DESCRIBE nama_table; atau DESC nama_table;
+
+10. untuk melihat syntax pembuatan table nya
+SHOW CREATE TABLE nama_table;
+
+11. untuk menambahkan kolom pada table
+ALTER TABLE nama_table
+    ADD COLUMN nama_column tipedata
+
+12. untuk menghapus table 
+ALTER TABLE nama_table
+    DROP COLUMN nama_column tipedata
+
+13. untuk rename nama kolom
+ALTER TABLE nama_table
+    RENAME COLUMN nama_column to nama_column_baru
+
+14. untuk mengubah tipe data dan mengubah posisi kolom dalam table, after untuk posisi setelah kolom lain, first untuk posisi pertama
+ALTER TABLE nama_table
+    MODIFY nama_column tipe_data_baru AFTER kolom_lain,
+    MODIFY nama_column tipe_data_baru FIRST
+
+15. untuk menjadikan kolom bisa nilai null atau tidak kita bisa buat null, kita bisa menggunakan not null dan null, bisa dilakukan pada ALTER MAUPUN CREATE, default value nya adalah null
+CREATE TABLE nama_table (
+    item1 tipe_data NOT NULL,
+    item2 tipe_data NULL,
+    ....
+) ENGINE = InnoDB;
+
+16. kita juga bisa menambahkan default value pada kolom jika null, khusus untuk DATETIME ataiu TIMESTAMP bisa gunakan CURRENT_TIMESTAMP untuk default value waktu saat ini, bisa kita ubah saat alter.
+CREATE TABLE nama_table (
+    item1 tipe_data NOT NULL DEFAULT value_default,
+    item2 TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+    ....
+) ENGINE = InnoDB;
+
+17. untuk menghapus semua data pada table
+TRUNCATE nama_table;
