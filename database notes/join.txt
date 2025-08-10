@@ -1,0 +1,25 @@
+
+1. di mysql kita bisa melakukan select ke beberapa table menggunakan JOIN, saat menggunakan join kita perlu menentukan table mana yang merupakan refrensi dari table lain jadi cocok untuk foreing key, namun semakin banyak melakukan join akan semakin lambat, contoh: 
+SELECT * FROM table_sekarang JOIN table_relasi ON (table_sekarang.kolom_yang_berelasi_dengan_products = table_relasi.table_relasi_refrensi)
+
+contoh:
+SELECT * FROM wishlist JOIN products ON (wishlist.id_product = products.id);
+
+sesudah select kita pun bisa memilih apa saja yang ditampilkan, contoh nya :
+SELECT products.id AS "id product", products.name AS "name product", wishlist.description AS "wishlist description" FROM wishlist 
+    JOIN products ON (wishlist.id_product = products.id);
+
+contoh join lebih dari 2:
+SELECT customers.email AS "customers email", products.id AS "products id", products.name AS "products name", wishlist.description AS "wishlist description" FROM wishlist
+    JOIN products ON (products.id = wishlist.id_product)
+    JOIN customers ON (customers.id = wishlist.id_customer);
+
+2. JOIN punya banyak jenis default nya adalah Inner Join, Inner Join hanya akan menampilkan data yang punya relasi, contoh nya
+SELECT * FROM categories
+    INNER JOIN products ON (products.id_category = categories.id);
+
+Lalu Left Join akan menampilkan data data berelasi dan data bagian kirinya saja, bisa dilihat diagram nya https://docs.google.com/presentation/d/1v4HllRI-BNj4EdJFLh4_jISq_dcosHoAVo5-LME-ghY/edit?slide=id.ga851a47433_0_15#slide=id.ga851a47433_0_15
+
+right join kebalikan dari left join, https://docs.google.com/presentation/d/1v4HllRI-BNj4EdJFLh4_jISq_dcosHoAVo5-LME-ghY/edit?slide=id.ga851a47433_0_25#slide=id.ga851a47433_0_25
+
+lalu ada cross join yang sangat jarang digunakan, https://docs.google.com/presentation/d/1v4HllRI-BNj4EdJFLh4_jISq_dcosHoAVo5-LME-ghY/edit?slide=id.ga851a47433_0_35#slide=id.ga851a47433_0_35

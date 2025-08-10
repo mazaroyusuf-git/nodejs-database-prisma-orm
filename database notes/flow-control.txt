@@ -1,0 +1,20 @@
+mysql mempunyai Flow Control mirip seperti if, else, dan case, https://dev.mysql.com/doc/refman/8.0/en/flow-control-functions.html, contoh nya:
+SELECT id,
+    CASE category
+        WHEN 'Mouse' THEN 'Tikus'
+        WHEN 'Keyboard' THEN 'Kibot'
+        WHEN 'Monitor' THEN 'Layar'
+        ELSE 'Dan Lain-lain'
+        END AS 'Category'
+FROM products;
+
+atau bisa juga dengan IF(), contoh nya:
+SELECT id, 
+    price,
+    IF(price <= 500000, 'MURAH', IF(price <= 1000000, 'MAHAL', 'MAHAL BANGET')) AS 'MAHAL ?'
+FROM products;
+jadi format nya IF(kondisi, true, false), 
+untuk yang diatas format nya IF(kondisi, true, else if(kondisi, true, false))
+
+atau bisa mengecek apakah data nya ada atau tidak dengan IFNULL, contoh:
+SELECT id, name, IFNULL(description, 'KOSONG') AS description FROM products;

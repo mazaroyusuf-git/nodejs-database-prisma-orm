@@ -1,0 +1,11 @@
+kita juga bisa melimit data yang di keluarkan ketikan melakukan select dengan limit
+SELECT * FROM nama_table
+    WHERE kolom1 > 0
+    ORDER BY kolom1
+    LIMIT 2;
+artinya datanya cuma keluar 2, atau bisa juga skip data 
+SELECT * FROM nama_table
+    WHERE kolom1 > 0
+    ORDER BY kolom1
+    LIMIT 1, 2;
+artinya skip 1 data dan tampilkan 2 data selanjutnya

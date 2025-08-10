@@ -1,0 +1,54 @@
+https://gist.github.com/bradtraversy/c831baaad44343cc945e76c2e30927b3
+
+1. JOIN punya banyak jenis default nya adalah Inner Join, Inner Join hanya akan menampilkan data yang punya relasi, contoh nya
+SELECT * FROM categories
+    INNER JOIN products ON (products.id_category = categories.id);
+
+Lalu Left Join akan menampilkan data data berelasi dan data bagian kirinya saja, bisa dilihat diagram nya https://docs.google.com/presentation/d/1v4HllRI-BNj4EdJFLh4_jISq_dcosHoAVo5-LME-ghY/edit?slide=id.ga851a47433_0_15#slide=id.ga851a47433_0_15
+
+right join kebalikan dari left join, https://docs.google.com/presentation/d/1v4HllRI-BNj4EdJFLh4_jISq_dcosHoAVo5-LME-ghY/edit?slide=id.ga851a47433_0_25#slide=id.ga851a47433_0_25
+
+lalu ada cross join yang sangat jarang digunakan, https://docs.google.com/presentation/d/1v4HllRI-BNj4EdJFLh4_jISq_dcosHoAVo5-LME-ghY/edit?slide=id.ga851a47433_0_35#slide=id.ga851a47433_0_35
+
+
+2. di mysql kita bisa menggunakan subquery misal nya kita melakukan select di dalam select, contoh 
+SELECT * FROM products
+    WHERE price > (SELECT AVG(price) FROM products);
+
+SELECT MAX(price)
+    FROM (SELECT price
+        FROM categories
+            INNER JOIN products
+                ON (products.id_category = categories.id)) AS cp;
+
+3. ada yang namanya SET yaitu hasil dari 2 SELECT query, ada banyak operator set yaitu UNION, UNION ALL, INTERSECT, dan MINUS
+CREATE TABLE guestbooks (
+    id INT NOT NULL AUTO_INCREMENT,
+    email VARCHAR(100),
+    title VARCHAR(200),
+    content TEXT,
+    PRIMARY KEY (id)
+) ENGINE = InnoDB;
+
+Union berguna untuk memfilter hasil dari 2 query agar tidak ada yang sama, misal ada yang sama tidak diperlihatkan
+SELECT DISTINCT email FROM customers
+UNION
+SELECT DISTINCT email FROM guestbooks;
+
+Union All kebalikannya duplikat juga akan di tampilkan
+SELECT DISTINCT email FROM customers
+UNION ALL
+SELECT DISTINCT email FROM guestbooks;
+
+INTERSECT adalah JOIN
+SELECT DISTINCT email FROM customers
+    WHERE email IN (SELECT DISTINCT email FROM guestbooks);
+
+sama dengan
+SELECT DISTINCT customers.email FROM customers
+    INNER JOIN guestbooks ON (guestbooks.email = customers.email);
+
+MINUS kebalikan dari UNION yaitu akan menghilangkan data yang sama, MINUS tidak ada cuma konsep bisa gunakan JOIN
+SELECT DISTINCT customers.email, guestbooks.email FROM customers
+LEFT JOIN guestbooks ON (guestbooks.email = customers.email)
+WHERE guestbooks.email IS NULL;

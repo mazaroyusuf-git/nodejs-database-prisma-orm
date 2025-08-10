@@ -1,0 +1,26 @@
+contoh pembuatan table 
+CREATE TABLE products (
+    id VARCHAR(100) NOT NULL,
+    name VARCHAR(100) NOT NULL,
+    description TEXT,
+    price INT UNSIGNED NOT NULL,
+    quantity INT UNSIGNED NOT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE = InnoDB;
+
+untuk memasukkan data ke table
+INSERT INTO nama_table(kolom1, kolom2, kolom3) VALUES (value_kolom1, value_kolom2, value_kolom3);
+
+saat membuat table disarankan atau bisa diwajinkan membuat primary key sebagai representasi dari identitas tiap data table dan harus unique, kita bisa set PRIMARY KEY pada saat create ataupun alter, satu table bisa lebih dari satu primary key pada kolom
+CREATE TABLE products (
+    id VARCHAR(100) NOT NULL,
+    name VARCHAR(100) NOT NULL,
+    description TEXT,
+    price INT UNSIGNED NOT NULL,
+    quantity INT UNSIGNED NOT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (id, ...)
+) ENGINE = InnoDB;
+
+ALTER TABLE products
+    ADD PRIMARY KEY (id)

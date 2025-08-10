@@ -1,0 +1,10 @@
+mysql juga bisa membuat relasi one to many, contoh nya table kategori berhubungan banyak dengan product, kita tidak perlu menggunakan UNIQUE KEY karena datannya bisa ber kali2 di tambah di table relasi nya, contoh:
+CREATE TABLE categories (
+    id VARCHAR(100) NOT NULL,
+    name VARCHAR(100) NOT NULL,
+    PRIMARY KEY (id)
+) ENGINE = InnoDB;
+
+UPDATE products
+    SET id_category = "C0004"
+    WHERE id IN ("P001", "P005", ...);

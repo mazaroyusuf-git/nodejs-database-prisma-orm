@@ -1,0 +1,9 @@
+di mysql kita bisa menggunakan subquery misal nya kita melakukan select di dalam select, contoh 
+SELECT * FROM products
+    WHERE price > (SELECT AVG(price) FROM products);
+
+SELECT MAX(price)
+    FROM (SELECT price
+        FROM categories
+            INNER JOIN products
+                ON (products.id_category = categories.id)) AS cp;

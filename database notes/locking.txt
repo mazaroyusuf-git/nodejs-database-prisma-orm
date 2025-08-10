@@ -1,0 +1,34 @@
+LOCKING adalah suatu operasi yang menahan perintah lain saat proses misal Transaction sendang berjalan agar misal nya perintah manipulasi data yang lain tidak dijalankan dan harus menunggu dan memastikan hanya ada 1 proses Transaction saja, ini cocok ketika traffic tinggi
+
+START TRANSACTION;
+
+coba sekarang jalankan Transaction lalu coba update denganperintah dibawah lalu gunakan console lain melakukan update yang sama, pasti akan menunggu dulu
+
+UPDATE guestbooks
+    SET title = 'diubah user 1'
+    WHERE id = 9;
+
+COMMIT;
+
+Transaction adalah cara otomatis melakukan locking, namun jika kita ingin melakukan LOCKING secara manual kita bisa menggunakan kata FOR UPDATE di depan perintah misalnya SELECT, jika ada printah lain melakukan UPDATE, DELETE, ATAU SELECT FOR UPDATE, maka akan disuruh menunggu sebelum COMMIT atau ROLLBACK, contoh :
+
+START TRANSACTION;
+FOR UPDATE harus di start transaction juga
+
+SELECT * FROM products WHERE id = 'P001' FOR UPDATE;
+
+COMMIT:
+
+namun harus hati2 jika melakukan locking terus menerus, bisa terjadi yang namanya DEADLOCK yaitu proses locking yang di lock oleh proses lain, ini akan menyebabkan infinite loading
+
+sebelum nya kita melakukan proses locking pada level perintah, kita juga bisa melakukan locking pada table, artinya seluruh data pada table akan di lock, kita bisa menggunakan LOCK TABLES lalu READ dan WRITE, setelah melakukan READ atau WRITE kita bisa unlock dengan UNLOCK TABLES, behaviour dari READ DAN WRITE lihat disini https://docs.google.com/presentation/d/1v4HllRI-BNj4EdJFLh4_jISq_dcosHoAVo5-LME-ghY/edit?slide=id.ga851a47433_0_253#slide=id.ga851a47433_0_253
+
+LOCK TABLES products READ;
+
+UPDATE products 
+    SET quantity = 100
+        WHERE id = "P001";
+
+UNLOCK TABLES;
+
+lalu kita juga bisa melakukan LOCKING pada perintah DDL seperti perintah yang mengubah struktur data, ini biasa dipakai untuk melakukan backup data, untuk mulai LOCKING INSTANCE FOR BACKUP, untuk selesai UNLOCK INSTANCE;

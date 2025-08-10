@@ -1,0 +1,11 @@
+selain math dan string method, mysql juga punya method untuk date time, https://dev.mysql.com/doc/refman/8.0/en/date-and-time-functions.html, contoh nya:
+SELECT id,
+    EXTRACT(YEAR FROM created_at) AS 'YEAR',
+    EXTRACT(MONTH FROM created_at) AS 'MONTH'
+FROM products;
+
+atau
+SELECT id,
+    YEAR(created_at),
+    MONTH(created_at)
+FROM products;

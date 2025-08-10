@@ -1,0 +1,33 @@
+1. pada real world case, kita sering menggunakan table relationship untuk optimisasi data di database, di mysql kita bisa melakukan nya dengan 
+CONSTRAINT nama_foreign_key FOREIGN KEY (kolom_sekarang_yang_ingin_tersambung_dengan_table_relasi) REFRENCES table_relasi (kolom_table_relasi)
+CREATE TABLE wishlist (
+    id INT NOT NULL AUTO_INCREMENT,
+    id_product VARCHAR(100) NOT NULL,
+    description TEXT,
+    PRIMARY KEY (id),
+    CONSTRAINT fk_wishlist_product
+        FOREIGN KEY (id_product) REFERENCES products (id)
+) ENGINE = InnoDB;
+
+biasa nya foreign key disambung dengan primary key relasi nya, untuk alter table gunakan add saja didepan nya, jika ingin hapus gunakan DROP CONSTRAINT nama_foreign_key, jika kita ingin menghapus misal nya data sekarang yang sedang berelasi dengan table lain kita perlu menghapus data relasi nya dulu baru hapus data sekarang.
+
+kita juga bisa mengubah behaviour saat table yang berelasi ingin dihapus atau di update, bisa lihat disini mode nya https://docs.google.com/presentation/d/1v4HllRI-BNj4EdJFLh4_jISq_dcosHoAVo5-LME-ghY/edit?slide=id.ga851a47068_0_37#slide=id.ga851a47068_0_37, contoh nya
+ALTER TABLE wishlist
+    ADD CONSTRAINT fk_wishlist_product
+        FOREIGN KEY (id_product) REFRENCES products (id)
+            ON DELETE CASCADE ON UPDATE CASCADE;
+
+
+2. relasi antar table product, wishlist, dan customers adalah relasi one to one, karena 1 kolom pada table hanya berelasi ke 1 table lain, ada 2 cara untuk membuat one to one relationship cara pertama adalah membuat foreign key menjadi unique key yang bisa mencegah terjadinya duplikat, atau cara ke kedua kita bisa menyamakan primary key yang sama misal table customer id 1 dan table wallet id 1 juga jadi tidak perlu membuat foreign key lagi, contoh :
+CREATE TABLE wallet (
+    id INT NOT NULL AUTO_INCREMENT,
+    id_customer INT NOT NULL,
+    balance INT NOT NULL DEFAULT 0,
+    PRIMARY KEY (id),
+    UNIQUE KEY fk_id_customer_unique (id_customer),
+    CONSTRAINT fk_wallet_customer
+        FOREIGN KEY (id_customer) REFERENCES customers (id)
+) ENGINE = InnoDB;
+
+SELECT customers.email AS email, customers.id AS "customers id", wallet.id AS "wallet id", balance 
+    FROM wallet JOIN customers ON (customers.id = wallet.id_customer);

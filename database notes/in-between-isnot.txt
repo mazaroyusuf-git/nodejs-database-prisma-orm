@@ -1,0 +1,23 @@
+mencari yang termasuk atau tidak termasuk dengan in dan not in
+SELECT * FROM nama_table
+    WHERE kolom NOT IN ("value", ...);
+
+kita juga bisa menggunakan pengecualian saat sedang select, update maupun alter dengan NOT IN
+UPDATE nama_table
+    SET kolom = value
+    WHERE kolom NOT IN (value, ...);
+
+contoh : 
+UPDATE products
+    SET category = 'Other Hardware'
+    WHERE category NOT IN ('Mouse', 'Keyboard', 'Monitor');
+
+artinya semua yang bukan berkategory Mouse, Keyboard, Monitor, data category nya akan di set ke Other Hardware
+
+kita juga bisa menselect dengan kata kunci is untuk mencari data spesifik, seperti IS NOT NULL atau IS NULL
+SELECT * FROM nama_table
+    WHERE kolom IS NOT NULL;
+
+kita juga bisa mencari data yang misal nya pada range tertentu menggunakan between atau not between
+SELECT * FROM nama_table
+    WHERE kolom BETWEEN minimal AND maksimal;

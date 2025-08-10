@@ -1,0 +1,5 @@
+mysql juga mendukung aritmethic operator seperti %, +, -, dll. DIV untuk membulatkan
+SELECT kolom_number DIV 1000 AS "K" FROM nama_table;
+
+5. ada juga method matematika yang bisa digunakan di mysql, https://dev.mysql.com/doc/refman/8.0/en/mathematical-functions.html bisa digunakan di select, where, dll/.
+SELECT POWER(10, 2); //sebagai contoh

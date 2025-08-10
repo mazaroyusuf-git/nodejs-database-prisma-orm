@@ -1,0 +1,24 @@
+secara default sql akan membuatkan satu user bernama root ini adalah user yang punya akses apa saja atau super admin. best practice nya saat membuat aplikasi kita perlu buat user tersendiri. saat membuat user sendiri kita perlu memberikan hak akses agar kita bisa memanipulasi data didalam nya, berikut table hak ases di mysql https://dev.mysql.com/doc/refman/8.0/en/grant.html 
+
+contoh cara membuat user
+CREATE USER 'yusuf'@'localhost';
+CREATE USER 'mazaro'@'%';
+
+tanda % artinya bisa mengakses dari localhost maupun address lain, namun ini tidak direkomendasikan
+
+contoh untuk menghapus user
+DROP USER 'yusuf'@'localhost';
+DROP USER 'mazaro'@'%';
+
+untuk menambahkan hak akses kita bisa gunakan contoh nya:
+GRANT SELECT, INSERT, UPDATE, DELETE ON belajar_mysql.* TO 'yusuf'@'localhost';
+artinya hak untuk melakukan SELECT, INSERT, UPDATE, DELETE pada database belajar_mysql dan table nya diberikan kepada user yusuf@localhost
+
+untuk melihat hak ases bisa gunakan 
+SHOW GRANTS FOR 'yusuf'@'localhost';
+
+untuk mencabut hak bisa gunakan 
+REVOKE SELECT, INSERT, UPDATE, DELETE ON belajar_mysql.* TO 'yusuf'@'localhost';
+
+untuk mengubah atau menambah password pada user bisa gunakan
+SET PASSWORD FOR 'yusuf'@'localhost' = '12345';

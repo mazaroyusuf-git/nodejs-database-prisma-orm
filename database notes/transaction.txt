@@ -1,0 +1,12 @@
+Transaction di mysql adalah fitur untuk menjalankan beberapa perintah sekaligus, Transaction tidak langsung di mulai begitu saja kita harus memberi perintah mulai nya dulu lalu kita bisa commit semua sekaligus, jika misal nya dari perintah2 tersebut ada yang gagal maka semua perintah tersebut akan di rollback atau di batalkan,, untuk memulai Transaction kita bisa gunakan START TRASACTION, untuk commit gunnakan COMMIT, untuk rollback gunakan ROLLBACK.
+
+START TRANSACTION;
+
+perintah diantara START dan COMMIT tidak akan di jalan kan duluan
+
+INSERT INTO guestbooks (email, title, content) 
+    VALUES ('contoh@gmail.com', 'guest', 'contoh');
+
+COMMIT;
+
+Transaction bisa digunakan untuk perintah DML atau DATA MANIPULATION LANGUANGE seperti INSERT, UPDATE, DELETE. namun tidak bisa untuk DML DATA DEFINITION LANGUANGE seperti perintah yang memanipulasi langsung struktur table dan database

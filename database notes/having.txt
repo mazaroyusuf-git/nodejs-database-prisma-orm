@@ -1,0 +1,7 @@
+saat kita ingin memfilter data yang sudah di grouping kita tidak bisa memakai WHERE, kita harus menggunakan HAVING, karena hasil nya dari aggregate method
+SELECT category,
+    COUNT(id) AS 'total'
+FROM products
+GROUP BY category
+HAVING total = 1;
+kita memfilter data total yang cuma ada 1

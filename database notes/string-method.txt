@@ -1,0 +1,2 @@
+mysql punya string method, bisa dilihat di, https://dev.mysql.com/doc/refman/8.0/en/string-functions.html, contoh salah satu nya:
+SELECT LENGTH(first_name) AS fn, LENGTH(last_name) AS ln from admin;

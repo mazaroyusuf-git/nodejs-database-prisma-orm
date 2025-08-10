@@ -1,0 +1,5 @@
+kita juga bisa menggunakan aggregate method seperti total, rata2, dll. https://dev.mysql.com/doc/refman/8.0/en/aggregate-functions.html, contoh nya:
+SELECT COUNT(id) AS 'Total Product' FROM products;
+SELECT AVG(price) AS 'Rata-rata' FROM products;
+SELECT MAX(price) AS 'Highest Price' FROM products;
+SELECT MIN(price) AS 'Lowest Price' FROM products;

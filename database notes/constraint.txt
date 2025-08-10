@@ -1,0 +1,27 @@
+1. kita bisa menambahkan CONSTRAINT pada kolom agar kolom tersebut sesuai dengan aturan standar yang kita buat dan contraint bisa lebih dari satu, contoh nya UNIQUE KEY namakey (kolom) yaitu kolom tersebut harus unique, contoh nya:
+CREATE TABLE customers (
+    id INT NOT NULL AUTO_INCREMENT,
+    email VARCHAR(100) NOT NULL,
+    first_name VARCHAR(100) NOT NULL,
+    last_name VARCHAR(100),
+    PRIMARY KEY(id),
+    UNIQUE KEY email_unique (email)
+) ENGINE = InnoDB;
+
+2. untuk menghapus dan menambahkan CONSTRAINT bisa dengan:
+ALTER TABLE customers
+    ADD CONSTRAINT email_unique UNIQUE (email);
+
+ALTER TABLE customers
+    DROP CONSTRAINT email_unique;
+
+
+3. ada juga CONSTRAINT untuk mengecek data dengan perbandingan yaitu CHECK CONSTRAINT, kondisi nya bebas
+ALTER TABLE products
+    ADD CONSTRAINT price_check CHECK (price > 1000);
+artinya setiap memasukkan data akan di cek price nya harus diatas 1000
+
+4. ada juga CONSTRAINT untuk mengecek data dengan perbandingan yaitu CHECK CONSTRAINT, kondisi nya bebas
+ALTER TABLE products
+    ADD CONSTRAINT price_check CHECK (price > 1000);
+artinya setiap memasukkan data akan di cek price nya harus diatas 1000

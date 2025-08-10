@@ -1,0 +1,21 @@
+untuk mengambil data dalam table bisa :
+untuk mengambil semua data
+SELECT * FROM nama_table; 
+
+untuk mengambil kolom spesifik pada table
+SELECT kolom1, kolom2, kolom3 
+    FROM nama_table;
+
+untuk mengambil data dengan kondisi where
+SELECT kolom1, kolom2, kolom3 FROM nama_table WHERE kolom1 = value;
+bisa juga menggunakan <,>,=,!=,<=,>=
+
+kita juga bisa menggunakan operator perbandingan AND dan OR
+SELECT kolom1, kolom2, kolom3 
+    FROM nama_table 
+    WHERE kolom kondisi value AND/OR kolom kondisi value;
+
+contoh:
+SELECT id, name, price, quantity 
+    FROM products
+    WHERE (quantity > 100 AND price > 1000000) AND category = "Other Hardwares";

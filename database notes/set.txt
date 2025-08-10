@@ -1,0 +1,31 @@
+ada yang namanya SET yaitu hasil dari 2 SELECT query, ada banyak operator set yaitu UNION, UNION ALL, INTERSECT, dan MINUS
+CREATE TABLE guestbooks (
+    id INT NOT NULL AUTO_INCREMENT,
+    email VARCHAR(100),
+    title VARCHAR(200),
+    content TEXT,
+    PRIMARY KEY (id)
+) ENGINE = InnoDB;
+
+Union berguna untuk memfilter hasil dari 2 query agar tidak ada yang sama, misal ada yang sama tidak diperlihatkan
+SELECT DISTINCT email FROM customers
+UNION
+SELECT DISTINCT email FROM guestbooks;
+
+Union All kebalikannya duplikat juga akan di tampilkan
+SELECT DISTINCT email FROM customers
+UNION ALL
+SELECT DISTINCT email FROM guestbooks;
+
+INTERSECT adalah JOIN
+SELECT DISTINCT email FROM customers
+    WHERE email IN (SELECT DISTINCT email FROM guestbooks);
+
+sama dengan
+SELECT DISTINCT customers.email FROM customers
+    INNER JOIN guestbooks ON (guestbooks.email = customers.email);
+
+MINUS kebalikan dari UNION yaitu akan menghilangkan data yang sama, MINUS tidak ada cuma konsep bisa gunakan JOIN
+SELECT DISTINCT customers.email, guestbooks.email FROM customers
+LEFT JOIN guestbooks ON (guestbooks.email = customers.email)
+WHERE guestbooks.email IS NULL;

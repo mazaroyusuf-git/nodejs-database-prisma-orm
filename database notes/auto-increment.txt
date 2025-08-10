@@ -1,0 +1,10 @@
+kita bisa menambahkan attribute autoincrement pada kolom, jadi setiap data yang masuk akan di +1 misal nya id 1, data selanjutnya yang masuk akan di increment jadi 2, ini bisa membantu jika banyak orang yang menambahkan. data ke table, contoh nya:
+CREATE TABLE admin (
+    id INT NOT NULL AUTO_INCREMENT,
+    first_name VARCHAR(100),
+    last_name VARCHAR(100),
+    PRIMARY KEY (id)
+) ENGINE = InnoDB;
+
+untuk melihat data terakhir yang di generate AUTO_INCREMENT
+SELECT LAST_INSERT_ID();

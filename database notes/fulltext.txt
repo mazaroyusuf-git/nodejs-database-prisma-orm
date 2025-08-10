@@ -1,0 +1,22 @@
+1. mysql adalah database yang tidak cocok jika digunakan sebagai search engine, kita bisa menggunakan like di mysql namun sangat lambat karena akan like akan mencari data di tabel dari baris pertama ke terakhir, index pun tidak akan membantu karena like tidak menggunakan index, namun di mysql kita bisa gunakan FULL TEXT SEARCH https://dev.mysql.com/doc/refman/8.0/en/fulltext-search.html, cara nya kita bisa menambahkan kolom full text di table
+ALTER TABLE products
+    ADD FULLTEXT product_search (name, description)
+artinya name dan description ketika di search akan mengecek seluruh text nya, untuk drop
+ALTER TABLE products
+    DROP INDEX product_search;
+karena fulltext adalah index
+
+2. fulltext search punya beberapa mode yaitu: https://docs.google.com/presentation/d/1v4HllRI-BNj4EdJFLh4_jISq_dcosHoAVo5-LME-ghY/edit?slide=id.gb0610ef87c_0_179#slide=id.gb0610ef87c_0_179, contoh dengan natural language mode
+SELECT * FROM products
+    WHERE MATCH(name, description)
+        AGAINST('Mouse' IN NATURAL LANGUAGE MODE);
+
+contoh Boolean mode
+SELECT * FROM products
+    WHERE MATCH(name, description)
+        AGAINST('+Keyboard -Mouse' IN BOOLEAN MODE);
+
+contoh query expansion
+SELECT * FROM products
+    WHERE MATCH(name, description)
+        AGAINST('Mouse' WITH QUERY EXPANSION);

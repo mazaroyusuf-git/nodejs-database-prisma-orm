@@ -1,0 +1,12 @@
+ketika data pada database semakin besar maka saat melakukan pencarian akan semakin lambat karena datanya dicek satu-persatu, namun kita bisa menambahkan index pada kolom tertentu dan akan ditambahkan ke dalam b tree, 
+dan akan dimudahkan juga ketika melakukan order by, https://dev.mysql.com/doc/refman/8.0/en/optimization-indexes.html, bisa lebih dari satu index dalam satu table, misal nya kita punya 3 index pada table pada saat pencarian berdasarkan 3 kolom tersebut misal (col1, col2, col3) bisa dengan cepat
+
+efek samping dari index ketika melakukan query cepat namun saat proses update akan lambat, UNIQUE CONSTRAINT dan PRIMARY KEY akan otomatis ditambahkan index saat membuat, contoh nya:
+CREATE TABLE sellers (
+    id INT NOT NULL AUTO_INCREMENT,
+    name VARCHAR(100),
+    email VARCHAR(100),
+    PRIMARY KEY(id),
+    UNIQUE KEY email_unique (email),
+    INDEX name_index (name, ...)
+) ENGINE = InnoDB;

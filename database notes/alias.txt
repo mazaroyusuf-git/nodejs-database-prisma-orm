@@ -1,0 +1,11 @@
+kita juga bisa melakukan alias ketika misal nya kita menselect kolom dengan nama yang panjang
+SELECT 
+    kolom_panjang1 AS kp1,
+    kolom_panjang2 AS kp2
+    FROM nama_table;
+
+bisa juga menggunakan alias pada table
+SELECT 
+    nt.kolom_panjang1 AS kp1,
+    nt.kolom_panjang2 AS kp2
+    FROM nama_table AS nt;

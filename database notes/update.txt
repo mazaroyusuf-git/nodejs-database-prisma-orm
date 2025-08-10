@@ -1,0 +1,14 @@
+untuk melakukan update kita bisa gunakan
+UPDATE nama_table 
+    SET kolom = value
+    WHERE ....
+
+Kita bisa mencocokan pola dalam teks saat sedang select, update maupun alter dengan LIKE
+UPDATE nama_table 
+    SET kolom = value
+    WHERE kolom_berteks LIKE '%pola%'
+
+contoh :
+UPDATE products
+    SET category = 'Monitor'
+    WHERE name LIKE '%Monitor%';

@@ -1,0 +1,3 @@
+kita bisa mengambil data dan mengurutkan nya dengan ASC ascending dan DESC descending
+SELECT * FROM nama_table
+    ORDER BY kolom1 ASC, kolom2 DESC;

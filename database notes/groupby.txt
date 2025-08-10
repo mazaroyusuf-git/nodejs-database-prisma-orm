@@ -1,0 +1,7 @@
+kita juga bisa melakukan Select lalu output data nya akan di group, misal nya kita ingin melihat rata2 product namun sesuai per category, https://dev.mysql.com/doc/refman/8.0/en/group-by-modifiers.html, kita bisa menggunakan GROUP BY namun ini hanya bisa untuk aggregate method
+SELECT category,
+    COUNT(id) AS 'Total Product'
+FROM products
+GROUP BY category;
+
+ketika kita menyelek misal nya seperti diatas category dan id, kita harus menggunakan group by agar mysql tidak bingung pengelompokan untuk category nya

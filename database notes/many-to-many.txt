@@ -1,0 +1,32 @@
+untuk membuat relasi many to many antar 2 table atau lebih solusi nya ada buat table di tengah nya yang menjadi penghubung antara table tersebut. 
+misal nya tabel products -> terhubung dengan id_product, table order detail, terhubung dengan id_order <- table order
+CREATE TABLE orders (
+    id INT NOT NULL AUTO_INCREMENT,
+    total INT NOT NULL,
+    order_date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (id)
+) ENGINE = InnoDB;
+
+CREATE TABLE orders_detail (
+    id_product VARCHAR(100) NOT NULL,
+    id_order INT NOT NULL,
+    price INT NOT NULL,
+    quantity INT NOT NULL,
+    PRIMARY KEY (id_product, id_order)
+) ENGINE = InnoDB;
+
+ALTER TABLE orders_detail
+    ADD CONSTRAINT fk_order_detail_products
+        FOREIGN KEY (id_product) REFERENCES products (id);
+
+ALTER TABLE orders_detail
+    ADD CONSTRAINT fk_order_detail_orders
+        FOREIGN KEY (id_order) REFERENCES orders (id);
+
+INSERT INTO orders_detail(id_product, id_order, price, quantity) 
+    VALUES ("P002", 2, 250000, 2);
+
+SELECT products.name AS "Products Name", id_product, orders_detail.id_product AS "Order Detail Product Id", orders_detail.id_order AS "Order Detail Order Id", orders.id AS "Orders Id", orders_detail.price, orders_detail.quantity, orders.order_date 
+    FROM orders_detail 
+        JOIN products ON (orders_detail.id_product = products.id) 
+        JOIN orders ON (orders_detail.id_order = orders.id);
