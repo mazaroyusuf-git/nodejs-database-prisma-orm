@@ -1,0 +1,79 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+// untuk membuat model simpel 
+model sample {
+  id String @id
+  name String @db.VarChar(100)
+} 
+
+model Customer {
+  id String @id @db.VarChar(100)
+  name String @db.VarChar(100)
+  email String @unique @db.VarChar(100)
+  phone String @unique @db.VarChar(100)
+  wallet Wallet?
+  comments Comment[]
+  likes Like[]
+
+  @@map("customers")
+}
+
+model Wallet {
+  id String @id @db.VarChar(100)
+  balance Int @db.Int
+  customer_id String @unique @db.VarChar(100)
+  customer Customer @relation(fields: [customer_id], references: [id])
+
+  @@map("wallet")
+}
+
+model Comment {
+  id Int @id @db.Int @default(autoincrement()) 
+  customer_id String @db.VarChar(100)
+  title String @db.VarChar(200)
+  description String @db.Text
+  customer Customer @relation(fields: [customer_id], references: [id])
+
+  @@map("comments")
+}
+
+model Like {
+  customer_id String
+  product_id String
+  customer Customer @relation(fields: [customer_id], references: [id])
+  product Product @relation(fields: [product_id], references: [id])
+
+  @@id([customer_id, product_id])
+  @@map("likes")
+}
+
+model Product {
+  id String @id @db.VarChar(100)
+  name String @db.VarChar(100)
+  price Int
+  stock Int
+  category String @db.VarChar(100)
+  likes Like[]
+
+  @@map("products")
+}
+
+model Category {
+  id Int @id @default(autoincrement())
+  name String @db.VarChar(100)
+
+  @@map("categories")
+}

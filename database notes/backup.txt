@@ -1,0 +1,8 @@
+untuk melakukan backup di mysql, mysql sudah menyiapkan aplikasi berbasis terminal yang bernama mysqldump https://dev.mysql.com/doc/refman/8.0/en/mysqldump.html, untuk menjalankan nya jika di windows kalau sudah di masukkan ke environment variable ada di ./bin/mysqldump kalau linux langsung saja mysqldump, contoh cammand nya 
+mysqldump -u root -p belajar_sql \
+    --result-file="$HOME/Belajar Node JS/belajar_mysql_backup.sql"
+
+untuk melakukan restore database yang sudah di backup, kita bisa gunakan SOURCE, pertama kita perlu import data nya terlebih dahulu contoh nya 
+mysql --user=root --password belajar_mysql_import < "$HOME/Belajar Node JS/belajar_mysql_backup.sql"
+jadi format nya mysql --user=... --password nama_database_baru < lokasi_backupnya
+dan pastika database sudah terbuat
